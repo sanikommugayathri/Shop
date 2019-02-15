@@ -11,17 +11,14 @@ import com.example.gayat.shop.Model.Category
 import com.example.gayat.shop.R
 import kotlinx.android.synthetic.main.activity_main.*
 
-class CategoryAdapter(context: Context, categories: List<Category>): BaseAdapter() {
-
-    val Context = context
-    val categories = categories
+class CategoryAdapter(val context: Context, val categories: List<Category>): BaseAdapter() {
 
     override fun getView(position: Int, convertView: View?, parent: ViewGroup?): View {
         val categoryView: View
         val holder : ViewHolder
 
         if (convertView == null) {
-            categoryView = LayoutInflater.from(Context).inflate(R.layout.category_list_item, null)
+            categoryView = LayoutInflater.from(context).inflate(R.layout.category_list_item, null)
             holder = ViewHolder()
             holder.categoryImage = categoryView.findViewById(R.id.categoryImage)
             holder.categoryName = categoryView.findViewById(R.id.categoryName)
@@ -33,7 +30,7 @@ class CategoryAdapter(context: Context, categories: List<Category>): BaseAdapter
 
         val category = categories[position]
 
-        val resourceID = Context.resources.getIdentifier(category.image, "drawable", Context.packageName)
+        val resourceID = context.resources.getIdentifier(category.image, "drawable", context.packageName)
         holder.categoryImage?.setImageResource(resourceID)
         holder.categoryName?.text = category.title
         return categoryView
